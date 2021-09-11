@@ -1,4 +1,4 @@
-class Box {
+class Tile {
     constructor(x, y, bgsquares) {
         this.x = x;
         this.y = y;
@@ -6,19 +6,19 @@ class Box {
         this.screenx = width * (.125 + 2 * (.125 * this.x));
         this.screeny = height * (.125 + 2 * (.125 * this.y));
         this.val = null;
-        bgsquares.arr[y][x].hasBox = true;
+        bgsquares.arr[y][x].hasTile = true;
     }
 
     updateCords(xdir, ydir, bgsquares) {
         let oldx = this.x;
         let oldy = this.y;
        
-        if (bgsquares.arr[oldy + ydir][oldx + xdir].hasBox) {
+        if (bgsquares.arr[oldy + ydir][oldx + xdir].hasTile) {
             console.log("beep");
         } else {
             this.x += xdir;
             this.y += ydir;
-            bgsquares.arr[oldy][oldx].hasBox = false;
+            bgsquares.arr[oldy][oldx].hasTile = false;
         }
 
         if (this.x < 0) {
@@ -32,7 +32,7 @@ class Box {
             this.y = 3;
         }
 
-        bgsquares.arr[this.y][this.x].hasBox = true;
+        bgsquares.arr[this.y][this.x].hasTile = true;
 
         //some math to make work with 0-4 cords
         this.screenx = width * (.125 + 2 * (.125 * this.x));

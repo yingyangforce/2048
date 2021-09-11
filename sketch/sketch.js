@@ -1,32 +1,33 @@
 let bgsquares;
-let boxArr = [];
-let box;
-let box2;
+let tileArr = [];
+let tile;
+let tile2;
 
 function setup() {
     createCanvas(500, 500);
     bgsquares = new BGSquares();
     bgsquares.initArr();
     //fillBoxes();
-    box = new Box(0, 0, bgsquares);
-    box2 = new Box(0, 1, bgsquares);
-    boxArr.push(box);
-    boxArr.push(box2);
+    tile = new Tile(0, 0, bgsquares);
+    tile2 = new Tile(0, 1, bgsquares);
+    tileArr.push(tile);
+    tileArr.push(tile2);
 }
 
 function fillBoxes() {
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
-            let box = new Box(i, j);
-            boxArr.push(box);
+            let tile = new Tile(i, j);
+           
+            tileArr.push(tile);
         }
     }
 }
 
 function updateAllCords(xdir, ydir) {
-    for (let i = 0; i < boxArr.length; i++) {
-        if (boxArr[i]) {
-            boxArr[i].updateCords(xdir, ydir, bgsquares);
+    for (let i = 0; i < tileArr.length; i++) {
+        if (tileArr[i]) {
+            tileArr[i].updateCords(xdir, ydir, bgsquares);
         }
     }
 }
@@ -44,9 +45,9 @@ function keyPressed() {
 }
 
 function drawBoxes() {
-    for (let i = 0; i < boxArr.length; i++) {
-        if (boxArr[i]) {
-            boxArr[i].draw();
+    for (let i = 0; i < tileArr.length; i++) {
+        if (tileArr[i]) {
+            tileArr[i].draw();
         }
     }
 }

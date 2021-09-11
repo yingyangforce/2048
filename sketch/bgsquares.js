@@ -13,7 +13,7 @@ class BGSquares {
     initArr() {
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
-                this.arr[i][j] = {x: j, y: i, screenx: width * (j * 0.25), screeny: height * (i * 0.25), hasBox: false};
+                this.arr[i][j] = {x: j, y: i, screenx: width * (j * 0.25), screeny: height * (i * 0.25), hasTile: false};
             }
         }
     }
@@ -44,24 +44,24 @@ class BGSquares {
     }
     */
     
-    numBoxesInRow(row) {
-        let numBoxes = 0;
+    numTilesInRow(row) {
+        let numTiles = 0;
         for (let i = 0; i < 3; i++) {
-            if (this.arr[row][i].hasBox) {
-                numBoxes += 1;
+            if (this.arr[row][i].hasTile) {
+                numTiles += 1;
             }
         }
-        return numVals;
+        return numTiles;
     }
     
-    numBoxesInCol(col) {
-        let numBoxes = 0;
+    numTilesInCol(col) {
+        let numTiles = 0;
         for(let i = 0; i < 3; i++) {
             if (this.arr[i][col].hasBox) {
-                numBoxes += 1;
+                numTiles += 1;
             }
         }
-        return numBoxes;
+        return numTiles;
     }
 
     draw() {
