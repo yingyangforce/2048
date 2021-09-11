@@ -1,17 +1,16 @@
 let bgsquares;
 let tileArr = [];
-let tile;
-let tile2;
 
 function setup() {
     createCanvas(500, 500);
     bgsquares = new BGSquares();
     bgsquares.initArr();
     //fillBoxes();
-    tile = new Tile(0, 0, bgsquares);
-    tile2 = new Tile(0, 1, bgsquares);
+    let tile = new Tile(0, 0, bgsquares);
+    let tile2 = new Tile(0, 1, bgsquares);
     tileArr.push(tile);
     tileArr.push(tile2);
+    console.log(bgsquares);
 }
 
 function fillBoxes() {

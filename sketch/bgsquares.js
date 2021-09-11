@@ -1,18 +1,14 @@
 class BGSquares {
     constructor() {
-        this.arr = [
-            [[0, 0], [0, 0], [0, 0], [0, 0]],
-            [[0, 0], [0, 0], [0, 0], [0, 0]],
-            [[0, 0], [0, 0], [0, 0], [0, 0]],
-            [[0, 0], [0, 0], [0, 0], [0, 0]]
-        ];
-        
+        this.arr = [];
         this.size = height * 0.25;
     }
 
     initArr() {
         for (let i = 0; i < 4; i++) {
+            this.arr[i] = [];
             for (let j = 0; j < 4; j++) {
+                this.arr[i].push([]);
                 this.arr[i][j] = {x: j, y: i, screenx: width * (j * 0.25), screeny: height * (i * 0.25), hasTile: false};
             }
         }
