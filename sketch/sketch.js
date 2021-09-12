@@ -1,23 +1,25 @@
+const tileArr = [];
 let bgsquares;
-let tileArr = [];
 
 function setup() {
     createCanvas(500, 500);
+
     bgsquares = new BGSquares();
     bgsquares.initArr();
-    
-    let tile = new Tile(0, 0, bgsquares);
-    let tile2 = new Tile(0, 1, bgsquares);
-    tileArr.push(tile);
-    tileArr.push(tile2);
+    newTile(bgsquares);
     console.log(bgsquares);
+    console.log(tileArr);
 }
 
-function fillTileArr() {
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-            let tile = new Tile(i, j);
-           
+function newTile(bgsquares, x = 0, y = 0, val = null) {
+    const tile = new Tile(x, y, bgsquares, val);
+    tileArr.push(tile);
+}
+
+function fillTileArr(bgsquares) {
+    for (let i = 0; i < bgsquares.gridHeight; i++) {
+        for (let j = 0; j < bgsquares.gridWidth; j++) {
+            let tile = new Tile(i, j, bgsquares);
             tileArr.push(tile);
         }
     }
@@ -26,9 +28,11 @@ function fillTileArr() {
 function updateAllCords(xdir, ydir) {
     for (let i in tileArr) {
         if (((tileArr[i].x + xdir) < 0) || ((tileArr[i].x + xdir) > bgsquares.gridWidth - 1)) {
-            return;
+            console.log(`Bump: ${tileArr[i].x} ${tileArr[i].y}`);
+            continue;
         } else if (((tileArr[i].y + ydir) < 0) || ((tileArr[i].y + ydir) > bgsquares.gridHeight - 1)) {
-            return;
+            console.log(`Bump: ${tileArr[i].x} ${tileArr[i].y}`);
+            continue;
         }
 
         if (tileArr[i]) {
@@ -37,7 +41,7 @@ function updateAllCords(xdir, ydir) {
     }
 }
 
-function keyPressed() {
+function keyPressed() { //updates cords in (x, y) dir
     if (keyCode === UP_ARROW) {
         updateAllCords(0, -1);
     } else if (keyCode === DOWN_ARROW) {

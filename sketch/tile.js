@@ -1,11 +1,11 @@
 class Tile {
-    constructor(x, y, bgsquares) {
+    constructor(x = 0, y = 0, bgsquares, val = null) {
         this.x = x;
         this.y = y;
+        this.val = val;
         //some math to make work with 0-4 cords
         this.screenx = width * (.125 + 2 * (.125 * this.x));
         this.screeny = height * (.125 + 2 * (.125 * this.y));
-        this.val = null;
         bgsquares.arr[y][x].hasTile = true;
     }
 
@@ -31,7 +31,9 @@ class Tile {
         rect(this.screenx, this.screeny, 100, 100, 10);
         
         if (this.val != null) {
-            textAlign(CENTER);
+            textSize(24);
+            textAlign(CENTER, CENTER);
+            textStyle(BOLD);
             fill(69); //Nice.
             text(`${this.val}`, this.screenx, this.screeny);
         }
