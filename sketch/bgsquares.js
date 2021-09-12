@@ -4,6 +4,7 @@ class BGSquares {
         this.size = height * 0.25;
         this.gridWidth = 4;
         this.gridHeight = 4;
+        this.initArr();
     }
 
     initArr() {

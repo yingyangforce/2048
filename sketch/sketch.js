@@ -5,7 +5,6 @@ function setup() {
     createCanvas(500, 500);
 
     bgsquares = new BGSquares();
-    bgsquares.initArr();
     newTile(bgsquares);
     console.log(bgsquares);
     console.log(tileArr);
