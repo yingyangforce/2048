@@ -2,12 +2,14 @@ class BGSquares {
     constructor() {
         this.arr = [];
         this.size = height * 0.25;
+        this.gridWidth = 4;
+        this.gridHeight = 4;
     }
 
     initArr() {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < this.gridHeight; i++) {
             this.arr[i] = [];
-            for (let j = 0; j < 4; j++) {
+            for (let j = 0; j < this.gridWidth; j++) {
                 this.arr[i].push([]);
                 this.arr[i][j] = {x: j, y: i, screenx: width * (j * 0.25), screeny: height * (i * 0.25), hasTile: false};
             }

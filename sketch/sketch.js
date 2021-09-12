@@ -5,7 +5,7 @@ function setup() {
     createCanvas(500, 500);
     bgsquares = new BGSquares();
     bgsquares.initArr();
-    //fillBoxes();
+    
     let tile = new Tile(0, 0, bgsquares);
     let tile2 = new Tile(0, 1, bgsquares);
     tileArr.push(tile);
@@ -13,7 +13,7 @@ function setup() {
     console.log(bgsquares);
 }
 
-function fillBoxes() {
+function fillTileArr() {
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             let tile = new Tile(i, j);
@@ -24,7 +24,13 @@ function fillBoxes() {
 }
 
 function updateAllCords(xdir, ydir) {
-    for (let i = 0; i < tileArr.length; i++) {
+    for (let i in tileArr) {
+        if (((tileArr[i].x + xdir) < 0) || ((tileArr[i].x + xdir) > bgsquares.gridWidth - 1)) {
+            return;
+        } else if (((tileArr[i].y + ydir) < 0) || ((tileArr[i].y + ydir) > bgsquares.gridHeight - 1)) {
+            return;
+        }
+
         if (tileArr[i]) {
             tileArr[i].updateCords(xdir, ydir, bgsquares);
         }

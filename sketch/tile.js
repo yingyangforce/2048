@@ -10,26 +10,12 @@ class Tile {
     }
 
     updateCords(xdir, ydir, bgsquares) {
-        let oldx = this.x;
-        let oldy = this.y;
-       
-        if (bgsquares.arr[oldy + ydir][oldx + xdir].hasTile) {
+        if (bgsquares.arr[this.y + ydir][this.x + xdir].hasTile) {
             console.log("beep");
         } else {
+            bgsquares.arr[this.y][this.x].hasTile = false;
             this.x += xdir;
             this.y += ydir;
-            bgsquares.arr[oldy][oldx].hasTile = false;
-        }
-
-        if (this.x < 0) {
-            this.x = 0;
-        } else if (this.x > 3) {
-            this.x = 3;
-        }
-        if (this.y < 0) {
-            this.y = 0;
-        } else if (this.y > 3) {
-            this.y = 3;
         }
 
         bgsquares.arr[this.y][this.x].hasTile = true;
