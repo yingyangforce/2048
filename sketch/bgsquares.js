@@ -19,32 +19,6 @@ class BGSquares {
         }
     }
 
-    /*
-    fillArr(val) { 
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 4; j++) {
-                this.arr[i][j].val = val;
-            }
-        }
-    }
-    */
-
-    /* 
-    shiftVals(dir) {
-        if (dir === "up") {
-            print("sup");
-            for (let i = 1; i < 4; i++) {
-                for (let j = 0; j < 4; j++) {
-                    if (this.sarr[i - 1][j].val == null) {
-                        this.sarr[i - 1][j].val == this.sarr[i][j].val;
-                    }
-                }
-            }    
-        }
-        print(dir);
-    }
-    */
-    
     numTilesInRow(row) {
         let numTiles = 0;
         for (let i = 0; i < 3; i++) {
