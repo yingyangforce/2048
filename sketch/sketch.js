@@ -1,11 +1,13 @@
 const tileArr = [];
-let bgsquares;
+const screenheight = 500;
+const screenwidth = 500;
+const bgsquares = new BGSquares(screenheight, screenwidth);
 
 function setup() {
-    createCanvas(500, 500);
+    createCanvas(screenwidth, screenheight);
 
-    bgsquares = new BGSquares();
     newTile(bgsquares);
+
     console.log(bgsquares);
     console.log(tileArr);
 }
