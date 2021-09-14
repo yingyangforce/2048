@@ -6,22 +6,22 @@ const bgsquares = new BGSquares(screenheight, screenwidth);
 function setup() {
     createCanvas(screenwidth, screenheight);
 
-    newTile(bgsquares);
+    newTile();
 
     console.log(bgsquares);
     console.log(tileArr);
 }
 
-function newTile(bgsquares, x = 0, y = 0, val = null) {
-    const tile = new Tile(x, y, bgsquares, val);
+//inits new tile, also passes bgsquares and tileArr
+function newTile(x = 0, y = 0, val = null) {
+    const tile = new Tile(x, y, bgsquares, tileArr, val);
     tileArr.push(tile);
 }
 
-function fillTileArr(bgsquares) {
+function fillTileArr() {
     for (let i = 0; i < bgsquares.gridHeight; i++) {
         for (let j = 0; j < bgsquares.gridWidth; j++) {
-            let tile = new Tile(i, j, bgsquares);
-            tileArr.push(tile);
+            newTile(i, j);
         }
     }
 }

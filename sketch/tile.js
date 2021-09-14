@@ -1,5 +1,5 @@
 class Tile {
-    constructor(x = 0, y = 0, bgsquares, val = null) {
+    constructor(x = 0, y = 0, bgsquares, tileArr, val = null) {
         this.x = x;
         this.y = y;
         this.val = val;
