@@ -6,7 +6,8 @@ const bgsquares = new BGSquares(screenheight, screenwidth);
 function setup() {
     createCanvas(screenwidth, screenheight);
 
-    newTile();
+    //newTile();
+    initTileArr();
 
     console.log(bgsquares);
     console.log(tileArr);
@@ -16,6 +17,15 @@ function setup() {
 function newTile(x = 0, y = 0, val = null) {
     const tile = new Tile(x, y, bgsquares, tileArr, val);
     tileArr.push(tile);
+}
+
+function initTileArr() {
+    for (let i = 0; i < bgsquares.gridHeight; i++) {
+        tileArr[i] = [];
+        for (let j = 0; j < bgsquares.gridWidth; j++) {
+            tileArr[i].push([null]);
+        }
+    }
 }
 
 //fill tile arr w val null tiles
@@ -73,6 +83,6 @@ function draw() {
     fill(69); 
     
     bgsquares.draw();
-    drawTiles();
+    //drawTiles();
 }
 
