@@ -18,6 +18,7 @@ function newTile(x = 0, y = 0, val = null) {
     tileArr.push(tile);
 }
 
+//fill tile arr w val null tiles
 function fillTileArr() {
     for (let i = 0; i < bgsquares.gridHeight; i++) {
         for (let j = 0; j < bgsquares.gridWidth; j++) {
@@ -26,6 +27,8 @@ function fillTileArr() {
     }
 }
 
+//updates cords of all tiles
+//TODO: update w/ new tileArr struct
 function updateAllCords(xdir, ydir) {
     for (let i in tileArr) {
         if (((tileArr[i].x + xdir) < 0) || ((tileArr[i].x + xdir) > bgsquares.gridWidth - 1)) {
@@ -42,6 +45,7 @@ function updateAllCords(xdir, ydir) {
     }
 }
 
+//update cords on keypresses
 function keyPressed() { //updates cords in (x, y) dir
     if (keyCode === UP_ARROW) {
         updateAllCords(0, -1);
@@ -54,7 +58,8 @@ function keyPressed() { //updates cords in (x, y) dir
     }
 }
 
-function drawBoxes() {
+
+function drawTiles() {
     for (let i = 0; i < tileArr.length; i++) {
         if (tileArr[i]) {
             tileArr[i].draw();
@@ -66,8 +71,8 @@ function draw() {
     background(100);
     //noStroke();
     fill(69); 
-   // box.updateCords(0, 0);
+    
     bgsquares.draw();
-    drawBoxes();
+    drawTiles();
 }
 
