@@ -6,8 +6,8 @@ const bgsquares = new BGSquares(screenheight, screenwidth);
 function setup() {
     createCanvas(screenwidth, screenheight);
 
-    //newTile();
     initTileArr();
+    newTile();
 
     console.log(bgsquares);
     console.log(tileArr);
@@ -16,22 +16,22 @@ function setup() {
 //inits new tile, also passes bgsquares and tileArr
 function newTile(x = 0, y = 0, val = null) {
     const tile = new Tile(x, y, bgsquares, tileArr, val);
-    tileArr.push(tile);
+    tileArr[y][x] = tile;
 }
 
 function initTileArr() {
     for (let i = 0; i < bgsquares.gridHeight; i++) {
         tileArr[i] = [];
         for (let j = 0; j < bgsquares.gridWidth; j++) {
-            tileArr[i].push([null]);
+            tileArr[i].push(null);
         }
     }
 }
 
 //fill tile arr w val null tiles
 function fillTileArr() {
-    for (let i = 0; i < bgsquares.gridHeight; i++) {
-        for (let j = 0; j < bgsquares.gridWidth; j++) {
+    for (let i = 0; i < tileArr.length; i++) {
+        for (let j = 0; j < tileArr[0].length; j++) {
             newTile(i, j);
         }
     }
@@ -68,11 +68,12 @@ function keyPressed() { //updates cords in (x, y) dir
     }
 }
 
-
 function drawTiles() {
     for (let i = 0; i < tileArr.length; i++) {
-        if (tileArr[i]) {
-            tileArr[i].draw();
+        for (let j = 0; j < tileArr[0].length; j++) {
+            if (tileArr[i][j] != null) {
+                tileArr[i][j].draw();
+            }
         }
     }
 }
@@ -83,6 +84,6 @@ function draw() {
     fill(69); 
     
     bgsquares.draw();
-    //drawTiles();
+    drawTiles();
 }
 

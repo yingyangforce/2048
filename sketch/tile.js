@@ -30,7 +30,7 @@ class Tile {
         rectMode(CENTER);
         rect(this.screenx, this.screeny, 100, 100, 10);
         
-        if (this.val != null) {
+        if (this.val) {
             textSize(24);
             textAlign(CENTER, CENTER);
             textStyle(BOLD);
