@@ -39,20 +39,21 @@ function fillTileArr() {
 
 //updates cords of all tiles
 //TODO: update w/ new tileArr struct
+//      split into horiz and vert functions?
 function updateAllCords(xdir, ydir) {
-    for (let i in tileArr) {
-        if (((tileArr[i].x + xdir) < 0) || ((tileArr[i].x + xdir) > bgsquares.gridWidth - 1)) {
-            console.log(`Bump: ${tileArr[i].x} ${tileArr[i].y}`);
-            continue;
-        } else if (((tileArr[i].y + ydir) < 0) || ((tileArr[i].y + ydir) > bgsquares.gridHeight - 1)) {
-            console.log(`Bump: ${tileArr[i].x} ${tileArr[i].y}`);
-            continue;
-        }
-
-        if (tileArr[i]) {
-            tileArr[i].updateCords(xdir, ydir, bgsquares);
-        }
+    if (xdir != 0) {
+        updateXCords(xdir);
+    } else {
+        updateYCords(ydir);
     }
+}
+
+function updateXCords(xdir) {
+
+}
+
+function updateYCords(ydir) {
+
 }
 
 //update cords on keypresses
@@ -68,6 +69,7 @@ function keyPressed() { //updates cords in (x, y) dir
     }
 }
 
+//calls draw() method on available tile instances
 function drawTiles() {
     for (let i = 0; i < tileArr.length; i++) {
         for (let j = 0; j < tileArr[0].length; j++) {

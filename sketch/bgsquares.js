@@ -14,29 +14,14 @@ class BGSquares {
             this.arr[i] = [];
             for (let j = 0; j < this.gridWidth; j++) {
                 this.arr[i].push([]);
-                this.arr[i][j] = {x: j, y: i, screenx: screenwidth * (j * 0.25), screeny: screenheight * (i * 0.25), hasTile: false};
+                this.arr[i][j] = {
+                    x: j,
+                    y: i,
+                    screenx: screenwidth * (j * 0.25),
+                    screeny: screenheight * (i * 0.25)
+                };
             }
         }
-    }
-
-    numTilesInRow(row) {
-        let numTiles = 0;
-        for (let i = 0; i < 3; i++) {
-            if (this.arr[row][i].hasTile) {
-                numTiles += 1;
-            }
-        }
-        return numTiles;
-    }
-    
-    numTilesInCol(col) {
-        let numTiles = 0;
-        for(let i = 0; i < 3; i++) {
-            if (this.arr[i][col].hasBox) {
-                numTiles += 1;
-            }
-        }
-        return numTiles;
     }
 
     draw() {
@@ -48,14 +33,6 @@ class BGSquares {
                 fill(59, 30, 30); //Nice.
                 stroke(254);
                 rect(j.screenx, j.screeny, this.size, this.size); 
-                
-                /*
-                textAlign(CENTER);
-                fill(200);
-                if (j.val != null) {
-                    text(`${j.val}`, j.x + (this.size / 2), j.y + (this.size / 2));
-                }
-                */
             }
         }
     }
