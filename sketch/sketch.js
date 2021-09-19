@@ -15,7 +15,7 @@ function setup() {
 
 //inits new tile, also passes bgsquares and tileArr
 function newTile(x = 0, y = 0, val = null) {
-    const tile = new Tile(x, y, bgsquares, tileArr, val);
+    const tile = new Tile(x, y, tileArr, val);
     tileArr[y][x] = tile;
 }
 
