@@ -50,23 +50,21 @@ function updateAllCords(xdir, ydir) {
 }
 */
 
-//fat arrow notation = wonderful
+//fat arrow notation is very very nice
 function updateXCords(xdir) { 
     for (row of tileArr) {
         //return truw if any member !== null
         if (row.some(member => member !== null)) {
-            console.log(row.filter(member => member !== null));
+            console.log(`Row ${tileArr.indexOf(row)}`, row.filter(member => member !== null));
         }
     }
 }
 
+//tileArr arrays should be same length, take indexes from first array
 function updateYCords(ydir) {
-    for (row in tileArr) {
-        if (tileArr[row].some(member => member !== null)) {
-            for (col in tileArr[row]) {
-                console.log(row, Number(col), tileArr[row][col]);
-            }
-        }
+    for (row in tileArr[0]) {
+        const tileCol = tileArr.map(member => member[row]);
+        console.log(`Col ${row}`, tileCol);
     }
 }
 
