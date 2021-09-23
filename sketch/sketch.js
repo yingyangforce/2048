@@ -8,12 +8,14 @@ function setup() {
 
     initTileArr();
     newTile();
+    newTile(1, 1, 3);
 
     console.log(bgsquares);
     console.log(tileArr);
 }
 
 //inits new tile, also passes bgsquares and tileArr
+//  note: x,y cords are passed as cartesian
 function newTile(x = 0, y = 0, val = null) {
     const tile = new Tile(x, y, tileArr, val);
     tileArr[y][x] = tile;
@@ -37,35 +39,47 @@ function fillTileArr() {
     }
 }
 
+/*
 //updates cords of all tiles
-//TODO: update w/ new tileArr struct
-//      split into horiz and vert functions?
 function updateAllCords(xdir, ydir) {
-    if (xdir != 0) {
+    if (xdir !== 0) {
         updateXCords(xdir);
     } else {
         updateYCords(ydir);
     }
 }
+*/
 
-function updateXCords(xdir) {
-
+//fat arrow notation = wonderful
+function updateXCords(xdir) { 
+    for (row of tileArr) {
+        //return truw if any member !== null
+        if (row.some(member => member !== null)) {
+            console.log(row.filter(member => member !== null));
+        }
+    }
 }
 
 function updateYCords(ydir) {
-
+    for (row in tileArr) {
+        if (tileArr[row].some(member => member !== null)) {
+            for (col in tileArr[row]) {
+                console.log(row, Number(col), tileArr[row][col]);
+            }
+        }
+    }
 }
 
 //update cords on keypresses
 function keyPressed() { //updates cords in (x, y) dir
     if (keyCode === UP_ARROW) {
-        updateAllCords(0, -1);
+        updateYCords(-1);
     } else if (keyCode === DOWN_ARROW) {
-        updateAllCords(0, 1);
+        updateYCords(1);
     } else if (keyCode === LEFT_ARROW) {
-        updateAllCords(-1, 0);
+        updateXCords(-1);
     } else if (keyCode === RIGHT_ARROW) {
-        updateAllCords(1, 0);
+        updateXCords(1);
     }
 }
 
