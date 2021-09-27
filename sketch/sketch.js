@@ -7,20 +7,22 @@ function setup() {
     createCanvas(screenwidth, screenheight);
 
     initTileArr();
-    newTile();
-    newTile(1, 1, 3);
+    newTile(0, 0, 4);
+    newTile(0, 1, 8);
+    newTile(1, 1, 2);
 
     console.log(bgsquares);
     console.log(tileArr);
 }
 
-//inits new tile, also passes bgsquares and tileArr
+//init new tile, also passes bgsquares and tileArr
 //  note: x,y cords are passed as cartesian
 function newTile(x = 0, y = 0, val = null) {
     const tile = new Tile(x, y, tileArr, val);
     tileArr[y][x] = tile;
 }
 
+//make array filled w nulls
 function initTileArr() {
     for (let i = 0; i < bgsquares.gridHeight; i++) {
         tileArr[i] = [];
@@ -31,7 +33,7 @@ function initTileArr() {
 }
 
 //fill tile arr w val null tiles
-function fillTileArr() {
+function nullOutTileArr() {
     for (let i = 0; i < tileArr.length; i++) {
         for (let j = 0; j < tileArr[0].length; j++) {
             newTile(i, j);
@@ -39,32 +41,23 @@ function fillTileArr() {
     }
 }
 
-/*
-//updates cords of all tiles
-function updateAllCords(xdir, ydir) {
-    if (xdir !== 0) {
-        updateXCords(xdir);
-    } else {
-        updateYCords(ydir);
-    }
-}
-*/
-
 //fat arrow notation is very very nice
 function updateXCords(xdir) { 
     for (row of tileArr) {
         //return truw if any member !== null
         if (row.some(member => member !== null)) {
-            console.log(`Row ${tileArr.indexOf(row)}`, row.filter(member => member !== null));
+            const rowtiles = row.filter(member => member !== null);
+            console.log(`Row ${tileArr.indexOf(row)}`, rowtiles);
         }
     }
 }
 
 //tileArr arrays should be same length, take indexes from first array
 function updateYCords(ydir) {
-    for (row in tileArr[0]) {
-        const tileCol = tileArr.map(member => member[row]);
-        console.log(`Col ${row}`, tileCol);
+    for (index in tileArr[0]) {
+        //makes col array out of row arrs @ index index
+        const coltiles = tileArr.map(member => member[index]);
+        console.log(`Col ${index}`, coltiles);
     }
 }
 
@@ -82,7 +75,7 @@ function keyPressed() { //updates cords in (x, y) dir
 }
 
 //calls draw() method on available tile instances
-function drawTiles() {
+function drawTiles(tileArr) {
     for (let i = 0; i < tileArr.length; i++) {
         for (let j = 0; j < tileArr[0].length; j++) {
             if (tileArr[i][j] != null) {
@@ -98,6 +91,6 @@ function draw() {
     fill(69); 
     
     bgsquares.draw();
-    drawTiles();
+    drawTiles(tileArr);
 }
 
