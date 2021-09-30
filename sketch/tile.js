@@ -8,10 +8,9 @@ class Tile {
         this.screeny = height * (.125 + 2 * (.125 * this.y));
     }
 
-    updateCords(xdir, ydir) {
-            this.x += xdir;
-            this.y += ydir;
-
+    updateCords(x, y) {
+        this.x = x;
+        this.y = y;
         //some math to make work with 0-4 cords
         this.screenx = width * (.125 + 2 * (.125 * this.x));
         this.screeny = height * (.125 + 2 * (.125 * this.y));
