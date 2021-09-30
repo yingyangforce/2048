@@ -6,10 +6,14 @@ const bgsquares = new BGSquares(screenheight, screenwidth);
 function setup() {
     createCanvas(screenwidth, screenheight);
 
-    initTileArr();
-    newTile(0, 0, 4);
-    newTile(0, 1, 8);
+    initTileArr(bgsquares);
+
+    newTile(0, 0, 2);
+    newTile(0, 1, 2);
     newTile(1, 1, 2);
+    newTile(2, 1, 2);
+    newTile(2, 2, 2);
+    newTile(3, 3, 8);
 
     console.log(bgsquares);
     console.log(tileArr);
@@ -23,7 +27,7 @@ function newTile(x = 0, y = 0, val = null) {
 }
 
 //make array filled w nulls
-function initTileArr() {
+function initTileArr(bgsquares) {
     for (let i = 0; i < bgsquares.gridHeight; i++) {
         tileArr[i] = [];
         for (let j = 0; j < bgsquares.gridWidth; j++) {
@@ -41,14 +45,38 @@ function nullOutTileArr() {
     }
 }
 
-//fat arrow notation is very very nice
+//make arr of tiles, checks for like vals & concats, adds nulls
 function updateXCords(xdir) { 
     for (row of tileArr) {
+        //skip row if empty, less indentation
+        if (row.every(member => member === null)) { continue; }
         //return truw if any member !== null
-        if (row.some(member => member !== null)) {
-            const rowtiles = row.filter(member => member !== null);
-            console.log(`Row ${tileArr.indexOf(row)}`, rowtiles);
+
+        const rowtiles = row.filter(member => member !== null);
+        
+        rowtiles.reverse();
+
+        for (let i = 0; i < rowtiles.length; i++) {
+            if (rowtiles[i + 1]) {
+                if (rowtiles[i].val === rowtiles[i + 1].val) {
+                    rowtiles[i].val *= 2;
+                    rowtiles.splice(i + 1, 1);
+                }
+            }
+            rowtiles[i].updateCords(row.length - i - 1, rowtiles[i].y);
         }
+        
+        rowtiles.reverse();
+
+        const numnulls = row.length - rowtiles.length;
+        
+        if (xdir === 1) {
+            for (let i = 0; i < numnulls; i++) {
+                rowtiles.unshift(null);
+            }
+            console.log(`New row:${tileArr.indexOf(row)}`, rowtiles);
+        }
+        tileArr[tileArr.indexOf(row)] = rowtiles;
     }
 }
 
@@ -57,7 +85,7 @@ function updateYCords(ydir) {
     for (index in tileArr[0]) {
         //makes col array out of row arrs @ index index
         const coltiles = tileArr.map(member => member[index]);
-        console.log(`Col ${index}`, coltiles);
+        console.log(`Col Y-${index}`, coltiles.filter(member => member !== null));
     }
 }
 
@@ -75,11 +103,11 @@ function keyPressed() { //updates cords in (x, y) dir
 }
 
 //calls draw() method on available tile instances
-function drawTiles(tileArr) {
-    for (let i = 0; i < tileArr.length; i++) {
-        for (let j = 0; j < tileArr[0].length; j++) {
-            if (tileArr[i][j] != null) {
-                tileArr[i][j].draw();
+function drawTiles() {
+    for (row of tileArr) {
+        for (tile of row) {
+            if (tile != null) {
+                tile.draw();
             }
         }
     }
@@ -91,6 +119,6 @@ function draw() {
     fill(69); 
     
     bgsquares.draw();
-    drawTiles(tileArr);
+    drawTiles();
 }
 
