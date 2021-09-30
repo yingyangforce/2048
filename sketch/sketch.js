@@ -47,6 +47,7 @@ function nullOutTileArr() {
 
 //make arr of tiles, checks for like vals & concats, adds nulls
 function updateXCords(xdir) { 
+    let anythingmoved = false;
     for (row of tileArr) {
         //skip row if empty, less indentation
         if (row.every(member => member === null)) { continue; }
@@ -54,7 +55,9 @@ function updateXCords(xdir) {
 
         const rowtiles = row.filter(member => member !== null);
         
-        rowtiles.reverse();
+        if (xdir === 1) {
+            rowtiles.reverse();
+        }
 
         for (let i = 0; i < rowtiles.length; i++) {
             if (rowtiles[i + 1]) {
@@ -63,10 +66,22 @@ function updateXCords(xdir) {
                     rowtiles.splice(i + 1, 1);
                 }
             }
-            rowtiles[i].updateCords(row.length - i - 1, rowtiles[i].y);
+            if (xdir == 1) {
+                if (rowtiles[i].x !== row.length - i - 1) {
+                    anythingmoved = true;
+                }
+                rowtiles[i].updateX(row.length - i - 1);
+            } else {
+                if (rowtiles[i].x !== row.length - i - 1) {
+                    anythingmoved = true;
+                }
+                rowtiles[i].updateX(i);
+            }
         }
         
-        rowtiles.reverse();
+        if (xdir === 1) {
+            rowtiles.reverse();
+        }
 
         const numnulls = row.length - rowtiles.length;
         
@@ -75,8 +90,18 @@ function updateXCords(xdir) {
                 rowtiles.unshift(null);
             }
             console.log(`New row:${tileArr.indexOf(row)}`, rowtiles);
+        } else {
+            for (let i = 0; i < numnulls; i++) {
+                rowtiles.push(null);
+            }
+            console.log(`New row:${tileArr.indexOf(row)}`, rowtiles);
         }
         tileArr[tileArr.indexOf(row)] = rowtiles;
+    }
+    if (anythingmoved) {
+        console.log("Something moved.");
+    } else {
+        console.log("Nothing moved.");
     }
 }
 
